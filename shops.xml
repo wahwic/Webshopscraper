@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <shops>
     <shop name="Alza">
+        <shopname>Alza</shopname>
         <url>https://www.alza.sk/lacne-graficke-karty-nvidia-geforce-rtx3080/18881467.htm#f&amp;cst=1&amp;cud=0&amp;pg=1&amp;pn=1&amp;prod=1378,1518,1284,2979&amp;sc=300</url>
-        <searchContent>browsingitemcontainer</searchContent>
+        <searchContent>div.browsingitemcontainer</searchContent>
         <items>div.browsingitem</items>
-        <name>div.fb>a.name</name>
-        <price>div.priceInner>span.c2</price>
+        <ProductName>div.top>div.fb>a.name</ProductName>
+        <ProductPrice>div.priceInner>span.c2</ProductPrice>
     </shop>
     <shop name="Heureka">
-        <url>https://graficke-karty.heureka.sk/f:2642:29422522,29055704,29517914;2652:29166283,984,1623,1007;p:807/</url>
-        <searchContent>todo</searchContent>
-        <items>todo</items>
-        <name>todo</name>
-        <price>todo</price>
+        <shopname>Heureka</shopname>
+        <url>https://graficke-karty.heureka.sk/f:2642:29422522,29517914;2652:29166283,984,1623,1007;p:807</url>
+        <searchContent>div#product-container</searchContent>
+        <items>div.p</items>
+        <ProductName>div.product-container>h2>a</ProductName>
+        <ProductPrice>div.buy>p.price>a>span.priceFrom</ProductPrice>
     </shop>
 </shops>

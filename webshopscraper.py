@@ -1,6 +1,7 @@
 import time
 import xml.etree.ElementTree as ET
 
+from datetime import datetime
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
@@ -32,20 +33,38 @@ def getNameAndPrice(XMLshopname, XMLsearchContent, XMLitems, XMLname, XMLprice):
         name = item.find_element_by_css_selector(XMLname)
         try:
             price = item.find_element_by_css_selector(XMLprice)
-            price = price.text.split(' ')[0]
-            price = float(price.replace(',','.'))
+            price = fixPriceString(price)
         except NoSuchElementException:
             price = "Out of stock"
-        print(XMLshopname +': '+ name.text.split('\n')[0] + ' -> ',price,'{currency}'.format(currency='€!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' if type(price) == type(1.1) else ''))
+        print(datetime.now().strftime("%H:%M:%S") + ' ' + XMLshopname + ': ' + name.text.split('\n')[0] + ' ->',price,'{currency}'.format(currency='€!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' if type(price) == type(1.1) else ''))
 
-#open page
-for XMLshop in XMLroot.findall('./shop'):
-    XMLurl = XMLshop.find('./url').text
-    XMLshopname = XMLshop.find('./shopname').text
-    driver.get(XMLurl)
-    time.sleep(5)
+def goThroughtXmlFile():
+    for XMLshop in XMLroot.findall('./shop'):
+        XMLurl = XMLshop.find('./url').text
+        XMLshopname = XMLshop.find('./shopname').text
+        driver.get(XMLurl)
+        time.sleep(5)
+        try:
+            getShop(XMLshopname)
+        except Exception:
+            print("Something's fucky.")
+
+def fixPriceString(price):
+    price = price.text.replace(' ','')
+    price = price.replace(',','.')
+    price = price.replace('€','')
+    return float(price)
+
+def fixNameString(nameString):
+    print()
+
+if __name__ == '__main__':
     try:
-        getShop(XMLshopname)
-    except:
-        print("That's a no.")
-driver.quit()
+        while True:
+            print('Cycle started at '+datetime.now().strftime("%H:%M:%S"))
+            goThroughtXmlFile()
+            time.sleep(60)
+            print('Cycle ended at '+datetime.now().strftime("%H:%M:%S"))
+    except KeyboardInterrupt:
+        pass
+    driver.quit() 

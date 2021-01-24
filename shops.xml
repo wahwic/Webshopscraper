@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+    shopname: custom name for the shop for the logmessage
+    url: url of the filtered search
+    searchContent: container of all items
+    items: list of all items for sale
+    ProductName: selector with the name of the product
+    ProductPrice: selector with the price of the product
+-->
 <shops>
     <shop name="Alza">
-        <shopname>Alza</shopname>
+        <shopname>Alza</shopname> 
         <url>https://www.alza.sk/lacne-graficke-karty-nvidia-geforce-rtx3080/18881467.htm#f&amp;cst=1&amp;cud=0&amp;pg=1&amp;pn=1&amp;prod=1378,1518,1284,2979&amp;sc=300</url>
         <searchContent>div.browsingitemcontainer</searchContent>
         <items>div.browsingitem</items>
@@ -15,5 +23,13 @@
         <items>div.p</items>
         <ProductName>div.product-container>h2>a</ProductName>
         <ProductPrice>div.buy>p.price>a>span.priceFrom</ProductPrice>
+    </shop>
+    <shop name="Gamescenter">
+        <shopname>Gamescenter</shopname>
+        <url>https://www.gamescenter.sk/sk/2408-geforce-rtx?graficka-karta=geforce-rtx-3080</url>
+        <searchContent>div#center_column</searchContent>
+        <items>#center_column>div.af_pl_wrapper>ul.product_list>li.ajax_block_product</items>
+        <ProductName>div.right-block>h5>a</ProductName>
+        <ProductPrice>div.content_price>span.product-price</ProductPrice>
     </shop>
 </shops>

@@ -15,7 +15,7 @@ options = Options()
 options.binary_location = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"
 options = webdriver.ChromeOptions()
 options.headless = True
-options.page_load_strategy = 'eager'
+#options.page_load_strategy = 'eager'
 options.add_argument('--disable-extensions')
 options.add_argument('--disable-gpu')
 options.add_argument('--log-level=3')
@@ -47,12 +47,14 @@ def goThroughtXmlFile():
     for XMLshop in XMLroot.findall('./shop'):
         XMLurl = XMLshop.find('./url').text
         XMLshopname = XMLshop.find('./shopname').text
-        driver.get(XMLurl)
-        time.sleep(5)
         try:
+            driver.get(XMLurl)
+            time.sleep(5)
+            print("Processing shop: " + XMLshopname)
             getShop(XMLshopname)
+            print("Finished processing " + XMLshopname)
         except Exception:
-            print("Something's fucky.")
+            print("Something's fucky with " + XMLshopname)
 
 def fixPriceString(price):
     price = price.text.replace(' ','')
@@ -65,11 +67,11 @@ def fixNameString(nameString):
 
 if __name__ == '__main__':
     try:
+        print('Processing started at '+datetime.now().strftime("%H:%M:%S"))
         while True:
-            print('Cycle started at '+datetime.now().strftime("%H:%M:%S"))
             goThroughtXmlFile()
-            time.sleep(60)
-            print('Cycle ended at '+datetime.now().strftime("%H:%M:%S"))
+            time.sleep(30)
     except KeyboardInterrupt:
         pass
+    print('Processing ended at '+datetime.now().strftime("%H:%M:%S"))
     driver.quit() 

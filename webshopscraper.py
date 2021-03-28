@@ -24,37 +24,39 @@ driverpath = "C:/Users/skucs/Documents/programming/Python/chromedriver.exe"
 driver = webdriver.Chrome(options=options, executable_path=driverpath)
 XMLroot = ET.parse('shops.xml', ET.XMLParser(encoding="utf-8")).getroot()
 
-def getShop(XMLshopname):
-    XMLsearchContent = XMLroot.find(".//shop[@name='{0}']/searchContent".format(XMLshopname)).text
-    XMLitems = XMLroot.find(".//shop[@name='{0}']/items".format(XMLshopname)).text
-    XMLname = XMLroot.find(".//shop[@name='{0}']/ProductName".format(XMLshopname)).text
-    XMLprice = XMLroot.find(".//shop[@name='{0}']/ProductPrice".format(XMLshopname)).text
-    getNameAndPrice(XMLshopname, XMLsearchContent, XMLitems, XMLname, XMLprice)
+def getShop(shop):
+    ItemsContainer = shop.find('ItemsContainer').text
+    ItemsList = shop.find('ItemsList').text
+    ProductName = shop.find('ProductName').text
+    ProductPrice = shop.find('ProductPrice').text
+    Stock = shop.find('Stock')
+    getNameAndPrice(shop.attrib.get('name'), ItemsContainer, ItemsList, ProductName, ProductPrice, Stock)
 
-def getNameAndPrice(XMLshopname, XMLsearchContent, XMLitems, XMLname, XMLprice):
-    searchContent = WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CSS_SELECTOR, XMLsearchContent)))
-    items = searchContent.find_elements_by_css_selector(XMLitems)
-    for item in items:
-        name = item.find_element_by_css_selector(XMLname)
-        try:
-            price = item.find_element_by_css_selector(XMLprice)
-            price = fixPriceString(price)
-        except NoSuchElementException:
-            price = "Out of stock"
-        print(datetime.now().strftime("%H:%M:%S") + ' ' + XMLshopname + ': ' + name.text.split('\n')[0] + ' ->',price,'{currency}'.format(currency='€!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' if type(price) == type(1.1) else ''))
+def getNameAndPrice(shopName, ItemsContainer, ItemsList, ProductName, ProductPrice, Stock):
+    allItemsContainer = WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CSS_SELECTOR, ItemsContainer)))
+    itemsForSale = allItemsContainer.find_elements_by_css_selector(ItemsList)
+    for item in itemsForSale:
+        if(checkAvailability(item, Stock)):
+            name = item.find_element_by_css_selector(ProductName)
+            try:
+                price = item.find_element_by_css_selector(ProductPrice)
+                price = fixPriceString(price)
+            except NoSuchElementException:
+                price = "Out of stock"
+            print(datetime.now().strftime("%H:%M:%S") + ' ' + shopName + ': ' + name.text.split('\n')[0] + ' ->',price,'{currency}'.format(currency='€!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' if type(price) == type(1.1) else ''))
 
-def goThroughtXmlFile():
-    for XMLshop in XMLroot.findall('./shop'):
-        XMLurl = XMLshop.find('./url').text
-        XMLshopname = XMLshop.find('./shopname').text
+def processXmlFile():
+    for shop in XMLroot.findall('shop'):
+        shopName = shop.attrib.get('name')
+        shopUrl = shop.find('url').text
         try:
-            driver.get(XMLurl)
+            driver.get(shopUrl)
             time.sleep(5)
-            print("Processing shop: " + XMLshopname)
-            getShop(XMLshopname)
-            print("Finished processing " + XMLshopname)
+            print("Processing shop: " + shopName)
+            getShop(shop)
+            print("Finished processing " + shopName)
         except Exception:
-            print("Something's fucky with " + XMLshopname)
+            print("Something's fucky with " + shopName)
 
 def fixPriceString(price):
     price = price.text.replace(' ','')
@@ -65,13 +67,23 @@ def fixPriceString(price):
 def fixNameString(nameString):
     print()
 
+def checkAvailability(product, Stock):
+    stockContainer = Stock.find('Container').text
+    stockAvailabilityClass = Stock.find('IsAvailable').text
+    isAvailable = product.find_elements_by_css_selector(stockAvailabilityClass)
+
+    if(isAvailable != None):
+        return 1
+    else:
+        return 0
+
 if __name__ == '__main__':
     try:
-        print('Processing started at '+datetime.now().strftime("%H:%M:%S"))
+        print('Processing started at ' + datetime.now().strftime("%H:%M:%S"))
         while True:
-            goThroughtXmlFile()
+            processXmlFile()
             time.sleep(30)
     except KeyboardInterrupt:
         pass
-    print('Processing ended at '+datetime.now().strftime("%H:%M:%S"))
+    print('Processing ended at ' + datetime.now().strftime("%H:%M:%S"))
     driver.quit() 

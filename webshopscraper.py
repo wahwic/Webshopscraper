@@ -15,6 +15,11 @@ options = Options()
 options.binary_location = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"
 options = webdriver.ChromeOptions()
 options.headless = True
+options.page_load_strategy = 'eager'
+options.add_argument('--disable-extensions')
+options.add_argument('--disable-gpu')
+options.add_argument('--log-level=3')
+
 driverpath = "C:/Users/skucs/Documents/programming/Python/chromedriver.exe"
 driver = webdriver.Chrome(options=options, executable_path=driverpath)
 XMLroot = ET.parse('shops.xml', ET.XMLParser(encoding="utf-8")).getroot()

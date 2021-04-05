@@ -5,7 +5,7 @@
     ItemsList: list of all items for sale
     ProductName: selector with the name of the product
     ProductPrice: selector with the price of the product
-    ProductStockCheck: selector with the string of available stock
+    Stock: selector with the string of available stock
 -->
 <shops>
     <shop name="Alza">
@@ -26,15 +26,22 @@
         <ItemsList>div.p</ItemsList>
         <ProductName>div.product-container>h2>a</ProductName>
         <ProductPrice>div.buy>p.price>a>span.priceFrom</ProductPrice>
-        <ProductStockCheck></ProductStockCheck>
-
+        <Stock>
+            <Container></Container>
+            <IsAvailable></IsAvailable>
+        </Stock>
     </shop> -->
-    <!-- <shop name="Gamescenter">
+    <shop name="Gamescenter">
         <url>https://www.gamescenter.sk/sk/2408-geforce-rtx</url>
+        <!-- <url>https://www.gamescenter.sk/sk/1651-pc-klavesnice</url> -->
         <ItemsContainer>div#center_column</ItemsContainer>
         <ItemsList>#center_column>div.af_pl_wrapper>ul.product_list>li.ajax_block_product</ItemsList>
         <ProductName>div.right-block>h5>a</ProductName>
         <ProductPrice>div.content_price>span.product-price</ProductPrice>
-        <ProductStockCheck>div.button-container>span.availability>span</ProductStockCheck>
-    </shop> -->
+        <Stock>
+            <Container></Container>
+            <IsAvailable>div.button-container>span.availability>span.available-now</IsAvailable>
+        </Stock>
+    </shop>
+    <!-- ADD EVGA EU?-->
 </shops>

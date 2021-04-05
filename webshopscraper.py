@@ -37,13 +37,12 @@ def getNameAndPrice(shopName, ItemsContainer, ItemsList, ProductName, ProductPri
     allItemsContainer = WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CSS_SELECTOR, ItemsContainer)))
     itemsForSale = allItemsContainer.find_elements_by_css_selector(ItemsList)
     for item in itemsForSale:
-        name = item.find_element_by_css_selector(ProductName)
+        name = fixNameString(item, ProductName)
         if checkAvailability(item, Stock):
-            price = item.find_element_by_css_selector(ProductPrice)
-            price = fixPriceString(price)
-            print(Fore.GREEN + datetime.now().strftime("%H:%M:%S") + ' ' + shopName + ': ' + '{:<60}'.format(name.text.split('\n')[0]) + ' ->',price,'€' + Style.RESET_ALL)
+            price = fixPriceString(item, ProductPrice)
+            print(Fore.GREEN + datetime.now().strftime("%H:%M:%S") + ' ' + shopName + ': ' + '{:<60}'.format(name) + ' ->',price,'€' + Style.RESET_ALL)
         else:
-            print(Fore.RED + datetime.now().strftime("%H:%M:%S") + ' ' + shopName + ': ' + '{:<60}'.format(name.text.split('\n')[0]) + ' -> Out of stock.' + Style.RESET_ALL)
+            print(Fore.RED + datetime.now().strftime("%H:%M:%S") + ' ' + shopName + ': ' + '{:<60}'.format(name) + ' -> Out of stock.' + Style.RESET_ALL)
 
 def processXmlFile():
     for shop in XMLroot.findall('shop'):
@@ -58,14 +57,17 @@ def processXmlFile():
         except Exception:
             print("Something's fucky with " + shopName)
 
-def fixPriceString(price):
+def fixPriceString(item, ProductPrice):
+    price = item.find_element_by_css_selector(ProductPrice)
     price = price.text.replace(' ','')
     price = price.replace(',','.')
     price = price.replace('€','')
     return float(price)
 
-def fixNameString(nameString):
-    print()
+def fixNameString(item, ProductName):
+    name = item.find_element_by_css_selector(ProductName)
+    name = name.text.split('\n')[0]
+    return name
 
 def checkAvailability(product, Stock):
     #stockContainer = Stock.find('Container').text

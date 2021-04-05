@@ -9,6 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys  # keyboard keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from colorama import Fore, Style
 
 #init
 options = Options()
@@ -36,14 +37,13 @@ def getNameAndPrice(shopName, ItemsContainer, ItemsList, ProductName, ProductPri
     allItemsContainer = WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CSS_SELECTOR, ItemsContainer)))
     itemsForSale = allItemsContainer.find_elements_by_css_selector(ItemsList)
     for item in itemsForSale:
-        if(checkAvailability(item, Stock)):
-            name = item.find_element_by_css_selector(ProductName)
-            try:
-                price = item.find_element_by_css_selector(ProductPrice)
-                price = fixPriceString(price)
-            except NoSuchElementException:
-                price = "Out of stock"
-            print(datetime.now().strftime("%H:%M:%S") + ' ' + shopName + ': ' + name.text.split('\n')[0] + ' ->',price,'{currency}'.format(currency='€!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' if type(price) == type(1.1) else ''))
+        name = item.find_element_by_css_selector(ProductName)
+        if checkAvailability(item, Stock):
+            price = item.find_element_by_css_selector(ProductPrice)
+            price = fixPriceString(price)
+            print(Fore.GREEN + datetime.now().strftime("%H:%M:%S") + ' ' + shopName + ': ' + '{:<60}'.format(name.text.split('\n')[0]) + ' ->',price,'€' + Style.RESET_ALL)
+        else:
+            print(Fore.RED + datetime.now().strftime("%H:%M:%S") + ' ' + shopName + ': ' + '{:<60}'.format(name.text.split('\n')[0]) + ' -> Out of stock.' + Style.RESET_ALL)
 
 def processXmlFile():
     for shop in XMLroot.findall('shop'):
@@ -68,20 +68,21 @@ def fixNameString(nameString):
     print()
 
 def checkAvailability(product, Stock):
-    stockContainer = Stock.find('Container').text
+    #stockContainer = Stock.find('Container').text
     stockAvailabilityClass = Stock.find('IsAvailable').text
     isAvailable = product.find_elements_by_css_selector(stockAvailabilityClass)
 
-    if(isAvailable != None):
-        return 1
+    if not isAvailable: # if list is empty, return not available
+        return 0 
     else:
-        return 0
+        return 1
 
 if __name__ == '__main__':
     try:
         print('Processing started at ' + datetime.now().strftime("%H:%M:%S"))
         while True:
             processXmlFile()
+            print('Waiting 30 seconds')
             time.sleep(30)
     except KeyboardInterrupt:
         pass

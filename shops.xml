@@ -8,18 +8,6 @@
     Stock: selector with the string of available stock
 -->
 <shops>
-    <shop name="Alza">
-        <url>https://www.alza.sk/graficke-karty-nvidia-geforce-rtx3080/18881467.htm#f&amp;cst=1&amp;cud=0&amp;pg=1&amp;prod=1378,1518,1284,2979</url>
-        <!-- <url>https://www.alza.sk/graficke-karty-s-cipom-nvidia/18849879.htm</url> -->
-        <ItemsContainer>div.browsingitemcontainer</ItemsContainer>
-        <ItemsList>div.browsingitem</ItemsList>
-        <ProductName>div.top>div.fb>a.name</ProductName>
-        <ProductPrice>div.priceInner>span.c2</ProductPrice>
-        <Stock>
-            <Container>div.bottom>div.avl</Container>
-            <IsAvailable>div.bottom>div.avl>span.avl0</IsAvailable>
-        </Stock>
-    </shop>
     <!-- <shop name="Heureka">
         <url>https://graficke-karty.heureka.sk/f:2642:29422522,29517914;2652:29166283,984,1623,1007;p:807</url>
         <ItemsContainer>div#product-container</ItemsContainer>
@@ -31,9 +19,19 @@
             <IsAvailable></IsAvailable>
         </Stock>
     </shop> -->
+    <shop name="Alza">
+        <url>https://www.alza.sk/graficke-karty-nvidia-geforce-rtx3080/18881467.htm#f&amp;cst=1&amp;cud=0&amp;pg=1&amp;prod=1378,1518,1284,2979</url>
+        <ItemsContainer>div.browsingitemcontainer</ItemsContainer>
+        <ItemsList>div.browsingitem</ItemsList>
+        <ProductName>div.top>div.fb>a.name</ProductName>
+        <ProductPrice>div.priceInner>span.c2</ProductPrice>
+        <Stock>
+            <Container>div.bottom>div.avl</Container>
+            <IsAvailable>div.bottom>div.avl>span.avl0</IsAvailable>
+        </Stock>
+    </shop>
     <shop name="Gamescenter">
         <url>https://www.gamescenter.sk/sk/2408-geforce-rtx</url>
-        <!-- <url>https://www.gamescenter.sk/sk/1651-pc-klavesnice</url> -->
         <ItemsContainer>div#center_column</ItemsContainer>
         <ItemsList>#center_column>div.af_pl_wrapper>ul.product_list>li.ajax_block_product</ItemsList>
         <ProductName>div.right-block>h5>a</ProductName>
@@ -43,5 +41,17 @@
             <IsAvailable>div.button-container>span.availability>span.available-now</IsAvailable>
         </Stock>
     </shop>
+    <!-- issue with cloudfare -->
+     <!-- <shop name="Caseking.de">
+        <url>https://www.caseking.de/pc-komponenten/grafikkarten/nvidia/geforce-rtx-3080?ckSuppliers=39-12-64-123-16&amp;ckTab=0&amp;sPage=1&amp;sSort=103</url>
+        <ItemsContainer>#listing-4col</ItemsContainer>
+        <ItemsList>#listing-4col>div>div.artbox</ItemsList>
+        <ProductName>a.producttitles>span.ProductTitle</ProductName>
+        <ProductPrice>div.inner>p>span.price</ProductPrice>
+        <Stock>
+            <Container></Container>
+            <IsAvailable>span.delivery_container>p.deliverable1</IsAvailable>
+        </Stock>
+    </shop> -->
     <!-- ADD EVGA EU?-->
 </shops>

@@ -11,7 +11,7 @@ from selenium.webdriver.common.keys import Keys  # keyboard keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from colorama import Fore, Style
- 
+
 #init
 #options = Options()
 #options.binary_location = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"
@@ -50,7 +50,8 @@ def getNameAndPrice(shopName, ItemsContainer, ItemsList, ProductName, ProductPri
         name = fixNameString(item, ProductName)
         if checkAvailability(item, Stock):
             price = fixPriceString(item, ProductPrice)
-            print(Fore.GREEN + datetime.now().strftime("%H:%M:%S") + ' ' + shopName + ': ' + '{:<60}'.format(name) + ' ->',price,'€' + Style.RESET_ALL)
+            productUrl = item.find_element_by_css_selector(ProductName).get_attribute('href')
+            print(Fore.GREEN + datetime.now().strftime("%H:%M:%S") + ' ' + shopName + ': ' + '{:<60}'.format(name) + ' ->',price,'€ -> ' + productUrl + Style.RESET_ALL)
         else:
             print(Fore.RED + datetime.now().strftime("%H:%M:%S") + ' ' + shopName + ': ' + '{:<60}'.format(name) + ' -> Out of stock.' + Style.RESET_ALL)
 
@@ -60,8 +61,8 @@ def processXmlFile():
         shopUrl = shop.find('url').text
         try:
             driver.get(shopUrl)
-            time.sleep(6)
             print("Processing shop: " + shopName)
+            time.sleep(6)
             getShop(shop)
             print("Finished processing " + shopName)
         except Exception:
@@ -97,8 +98,8 @@ if __name__ == '__main__':
         print('Processing started at ' + datetime.now().strftime("%H:%M:%S"))
         while True:
             processXmlFile()
-            print('Waiting 30 seconds')
-            time.sleep(30)
+            print('Waiting 15 seconds for next round')
+            time.sleep(15)
     except KeyboardInterrupt:
         pass
     print('Processing ended at ' + datetime.now().strftime("%H:%M:%S"))

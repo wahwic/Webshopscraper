@@ -19,7 +19,7 @@
             <IsAvailable></IsAvailable>
         </Stock>
     </shop> -->
-    <shop name="Alza">
+    <shop name="AlzaSK">
         <url>https://www.alza.sk/graficke-karty-nvidia-geforce-rtx3080/18881467.htm#f&amp;cst=1&amp;cud=0&amp;pg=1&amp;prod=1378,1518,1284,2979</url>
         <ItemsContainer>div.browsingitemcontainer</ItemsContainer>
         <ItemsList>div.browsingitem</ItemsList>
@@ -30,6 +30,61 @@
             <IsAvailable>div.bottom>div.avl>span.avl0</IsAvailable>
         </Stock>
     </shop>
+    <shop name="AlzaCZ">
+        <url>https://www.alza.cz/graficke-karty-nvidia-geforce-rtx3080/18881467.htm#f&amp;cst=1&amp;cud=0&amp;pg=1&amp;prod=1378,1518,1284,2979</url>
+        <ItemsContainer>div.browsingitemcontainer</ItemsContainer>
+        <ItemsList>div.browsingitem</ItemsList>
+        <ProductName>div.top>div.fb>a.name</ProductName>
+        <ProductPrice>div.priceInner>span.c2</ProductPrice>
+        <Stock>
+            <Container>div.bottom>div.avl</Container>
+            <IsAvailable>div.bottom>div.avl>span.avl0</IsAvailable>
+        </Stock>
+    </shop>
+    <shop name="AlzaAT">
+        <url>https://www.alza.at/nvidia-geforce-rtx3080-grafikkarten/18881467.htm#f&amp;cst=null&amp;cud=0&amp;pg=1&amp;prod=1378,1518,1284,2979</url>
+        <ItemsContainer>div.browsingitemcontainer</ItemsContainer>
+        <ItemsList>div.browsingitem</ItemsList>
+        <ProductName>div.top>div.fb>a.name</ProductName>
+        <ProductPrice>div.priceInner>span.c2</ProductPrice>
+        <Stock>
+            <Container>div.bottom>div.avl</Container>
+            <IsAvailable>div.bottom>div.avl>span.avl0</IsAvailable>
+        </Stock>
+    </shop>
+    <shop name="AlzaHU">
+        <url>https://www.alza.hu/nvidia-geforce-rtx3080-grafikkarten/18881467.htm#f&amp;cst=null&amp;cud=0&amp;pg=1&amp;prod=1378,1518,1284,2979</url>
+        <ItemsContainer>div.browsingitemcontainer</ItemsContainer>
+        <ItemsList>div.browsingitem</ItemsList>
+        <ProductName>div.top>div.fb>a.name</ProductName>
+        <ProductPrice>div.priceInner>span.c2</ProductPrice>
+        <Stock>
+            <Container>div.bottom>div.avl</Container>
+            <IsAvailable>div.bottom>div.avl>span.avl0</IsAvailable>
+        </Stock>
+    </shop>
+    <shop name="AlzaDE">
+        <url>https://www.alza.de/nvidia-geforce-rtx3080-grafikkarten/18881467.htm</url>
+        <ItemsContainer>div.browsingitemcontainer</ItemsContainer>
+        <ItemsList>div.browsingitem</ItemsList>
+        <ProductName>div.top>div.fb>a.name</ProductName>
+        <ProductPrice>div.priceInner>span.c2</ProductPrice>
+        <Stock>
+            <Container>div.bottom>div.avl</Container>
+            <IsAvailable>div.bottom>div.avl>span.avl0</IsAvailable>
+        </Stock>
+    </shop> 
+    <shop name="Alzashop">
+        <url>https://www.alzashop.com/graphics-cards-nvidia-geforce-rtx3080/18881467.htm</url>
+        <ItemsContainer>div.browsingitemcontainer</ItemsContainer>
+        <ItemsList>div.browsingitem</ItemsList>
+        <ProductName>div.top>div.fb>a.name</ProductName>
+        <ProductPrice>div.priceInner>span.c2</ProductPrice>
+        <Stock>
+            <Container>div.bottom>div.avl</Container>
+            <IsAvailable>div.bottom>div.avl>span.avl0</IsAvailable>
+        </Stock>
+    </shop> 
     <shop name="Gamescenter">
         <url>https://www.gamescenter.sk/sk/2408-geforce-rtx</url>
         <ItemsContainer>div#center_column</ItemsContainer>

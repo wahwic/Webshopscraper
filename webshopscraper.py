@@ -7,7 +7,7 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys  # keyboard keys
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from colorama import Fore, Style
@@ -49,9 +49,10 @@ def getNameAndPrice(shopName, ItemsContainer, ItemsList, ProductName, ProductPri
     for item in itemsForSale:
         name = fixNameString(item, ProductName)
         if checkAvailability(item, Stock):
-            price = fixPriceString(item, ProductPrice)
+            currency = determineCurrency(shopName)
+            price = fixPriceString(item, ProductPrice, currency)
             productUrl = item.find_element_by_css_selector(ProductName).get_attribute('href')
-            print(Fore.GREEN + datetime.now().strftime("%H:%M:%S") + ' ' + shopName + ': ' + '{:<60}'.format(name) + ' ->',price,'€ -> ' + productUrl + Style.RESET_ALL)
+            print(Fore.GREEN + datetime.now().strftime("%H:%M:%S") + ' ' + shopName + ': ' + '{:<60}'.format(name) + ' ->',price,currency,' -> ' + productUrl + Style.RESET_ALL)
         else:
             print(Fore.RED + datetime.now().strftime("%H:%M:%S") + ' ' + shopName + ': ' + '{:<60}'.format(name) + ' -> Out of stock.' + Style.RESET_ALL)
 
@@ -68,10 +69,10 @@ def processXmlFile():
         except Exception:
             print("Something's fucky with " + shopName)
 
-def fixPriceString(item, ProductPrice):
+def fixPriceString(item, ProductPrice, currency):
     price = item.find_element_by_css_selector(ProductPrice)
     price = price.text
-    price = price.split('€', 1)[0]
+    price = price.split(currency, 1)[0]
     price = price.replace(' ','')
     if price[len(price)-3] != '.':
         price = price.replace('.','')
@@ -82,6 +83,18 @@ def fixNameString(item, ProductName):
     name = item.find_element_by_css_selector(ProductName)
     name = name.text.split('\n')[0]
     return name
+
+def determineCurrency(shopname):
+    domain = shopname.split('.', 1)[1]
+    if domain == 'sk' or domain == 'de' or domain == 'at' or domain == 'com':
+        currency = '€'
+    elif domain == 'hu':
+        currency = 'Ft'
+    elif domain == 'cz':
+        currency = 'Kč'
+    else: 
+        currency = ''
+    return currency
 
 def checkAvailability(product, Stock):
     #stockContainer = Stock.find('Container').text

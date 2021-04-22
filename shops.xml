@@ -8,7 +8,7 @@
     Stock: selector with the string of available stock
 -->
 <shops>
-    <!-- <shop name="Heureka">
+    <!-- <shop name="Heureka.sk">
         <url>https://graficke-karty.heureka.sk/f:2642:29422522,29517914;2652:29166283,984,1623,1007;p:807</url>
         <ItemsContainer>div#product-container</ItemsContainer>
         <ItemsList>div.p</ItemsList>
@@ -19,7 +19,7 @@
             <IsAvailable></IsAvailable>
         </Stock>
     </shop> -->
-    <shop name="AlzaSK">
+    <shop name="Alza.sk">
         <url>https://www.alza.sk/graficke-karty-nvidia-geforce-rtx3080/18881467.htm#f&amp;cst=1&amp;cud=0&amp;pg=1&amp;prod=1378,1518,1284,2979</url>
         <ItemsContainer>div.browsingitemcontainer</ItemsContainer>
         <ItemsList>div.browsingitem</ItemsList>
@@ -30,7 +30,7 @@
             <IsAvailable>div.bottom>div.avl>span.avl0</IsAvailable>
         </Stock>
     </shop>
-    <shop name="AlzaCZ">
+    <shop name="Alza.cz">
         <url>https://www.alza.cz/graficke-karty-nvidia-geforce-rtx3080/18881467.htm#f&amp;cst=1&amp;cud=0&amp;pg=1&amp;prod=1378,1518,1284,2979</url>
         <ItemsContainer>div.browsingitemcontainer</ItemsContainer>
         <ItemsList>div.browsingitem</ItemsList>
@@ -41,7 +41,7 @@
             <IsAvailable>div.bottom>div.avl>span.avl0</IsAvailable>
         </Stock>
     </shop>
-    <shop name="AlzaAT">
+    <shop name="Alza.at">
         <url>https://www.alza.at/nvidia-geforce-rtx3080-grafikkarten/18881467.htm#f&amp;cst=null&amp;cud=0&amp;pg=1&amp;prod=1378,1518,1284,2979</url>
         <ItemsContainer>div.browsingitemcontainer</ItemsContainer>
         <ItemsList>div.browsingitem</ItemsList>
@@ -52,7 +52,7 @@
             <IsAvailable>div.bottom>div.avl>span.avl0</IsAvailable>
         </Stock>
     </shop>
-    <shop name="AlzaHU">
+    <shop name="Alza.hu">
         <url>https://www.alza.hu/nvidia-geforce-rtx3080-grafikkarten/18881467.htm#f&amp;cst=null&amp;cud=0&amp;pg=1&amp;prod=1378,1518,1284,2979</url>
         <ItemsContainer>div.browsingitemcontainer</ItemsContainer>
         <ItemsList>div.browsingitem</ItemsList>
@@ -63,7 +63,7 @@
             <IsAvailable>div.bottom>div.avl>span.avl0</IsAvailable>
         </Stock>
     </shop>
-    <shop name="AlzaDE">
+    <shop name="Alza.de">
         <url>https://www.alza.de/nvidia-geforce-rtx3080-grafikkarten/18881467.htm</url>
         <ItemsContainer>div.browsingitemcontainer</ItemsContainer>
         <ItemsList>div.browsingitem</ItemsList>
@@ -74,7 +74,7 @@
             <IsAvailable>div.bottom>div.avl>span.avl0</IsAvailable>
         </Stock>
     </shop> 
-    <shop name="Alzashop">
+    <shop name="Alzashop.com">
         <url>https://www.alzashop.com/graphics-cards-nvidia-geforce-rtx3080/18881467.htm</url>
         <ItemsContainer>div.browsingitemcontainer</ItemsContainer>
         <ItemsList>div.browsingitem</ItemsList>
@@ -85,7 +85,7 @@
             <IsAvailable>div.bottom>div.avl>span.avl0</IsAvailable>
         </Stock>
     </shop> 
-    <shop name="Gamescenter">
+    <shop name="Gamescenter.sk">
         <url>https://www.gamescenter.sk/sk/2408-geforce-rtx</url>
         <ItemsContainer>div#center_column</ItemsContainer>
         <ItemsList>#center_column>div.af_pl_wrapper>ul.product_list>li.ajax_block_product</ItemsList>
@@ -94,6 +94,28 @@
         <Stock>
             <Container></Container>
             <IsAvailable>div.button-container>span.availability>span.available-now</IsAvailable>
+        </Stock>
+    </shop>
+    <shop name="Czc.cz">
+        <url>https://www.czc.cz/graficke-karty/produkty?q-c-0-f_2027483=sGeForce%20RTX%203080&amp;q-c-1-f_2027455=saktivn%C3%AD</url>
+        <ItemsContainer>#tiles</ItemsContainer>
+        <ItemsList>#tiles>div</ItemsList>
+        <ProductName>#tiles>div>div.overflow>div.tile-title>h5>a</ProductName>
+        <ProductPrice>#tiles>div>div.overflow>div.price-wrapper>div>span>span.price-vatin</ProductPrice>
+        <Stock>
+            <Container></Container>
+            <IsAvailable>#tiles>div>div.overflow>div.price-wrapper>div>span>span.price-vatin</IsAvailable>
+        </Stock>
+    </shop>
+    <shop name="Mironet.sk">
+        <url>https://www.mironet.cz/graficke-karty/nvidia/geforce-rtx-3080+fc36122/?pn4293%5B%5D=EVGA&amp;pn4293%5B%5D=Zotac&amp;pn4293%5B%5D=Gigabyte&amp;pn4293%5B%5D=Asus&amp;pn4293%5B%5D=MSI&amp;pn10930%5B%5D=NVIDIA&amp;pn10931%5B%5D=NVIDIA%20GeForce%20RTX%20-%203080&amp;pn10948%5B%5D=Aktivn%C3%AD%20s%20ventil%C3%A1torem&amp;sort=2</url>
+        <ItemsContainer>#productContainer</ItemsContainer>
+        <ItemsList>div.item_b</ItemsList>
+        <ProductName>div.item_b>form>div.item_nazev_popis>div.nazev>a</ProductName>
+        <ProductPrice>div.item_b>form>div.item_cena_kosik>div.item_cena>div</ProductPrice>
+        <Stock>
+            <Container></Container>
+            <IsAvailable>div.item_b>form>div.item_cena_kosik>div.item_cena</IsAvailable>
         </Stock>
     </shop>
     <!-- issue with cloudfare -->

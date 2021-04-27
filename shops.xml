@@ -107,7 +107,7 @@
             <IsAvailable>#tiles>div>div.overflow>div.price-wrapper>div>span>span.price-vatin</IsAvailable>
         </Stock>
     </shop>
-    <shop name="Mironet.sk">
+    <shop name="Mironet.sk"> <!-- actually cz but uses € -->
         <url>https://www.mironet.cz/graficke-karty/nvidia/geforce-rtx-3080+fc36122/?pn4293%5B%5D=EVGA&amp;pn4293%5B%5D=Zotac&amp;pn4293%5B%5D=Gigabyte&amp;pn4293%5B%5D=Asus&amp;pn4293%5B%5D=MSI&amp;pn10930%5B%5D=NVIDIA&amp;pn10931%5B%5D=NVIDIA%20GeForce%20RTX%20-%203080&amp;pn10948%5B%5D=Aktivn%C3%AD%20s%20ventil%C3%A1torem&amp;sort=2</url>
         <ItemsContainer>#productContainer</ItemsContainer>
         <ItemsList>div.item_b</ItemsList>

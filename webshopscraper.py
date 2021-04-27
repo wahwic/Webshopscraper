@@ -17,9 +17,6 @@ from colorama import Fore, Style
 #options.binary_location = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"
 options = uc.ChromeOptions()
 options.headless = True
-#options.add_argument('--headless')
-#options.add_argument('--window-size=800,600')
-#options.page_load_strategy = 'eager'
 options.add_argument('--disable-extensions')
 options.add_argument('--disable-gpu')
 options.add_argument('--log-level=3')
@@ -110,7 +107,7 @@ if __name__ == '__main__':
     try:
         print('Processing started at ' + datetime.now().strftime("%H:%M:%S"))
         while True:
-            processXmlFile()
+            processXmlFile() # TODO parallelism
             print('Waiting 15 seconds for next round')
             time.sleep(15)
     except KeyboardInterrupt:

@@ -1,1 +1,2 @@
-# Webshopscraper is a tool to scrape Slovak eshops
+# Tool to get stock info of (slovak) eshops
+# Work in progress - Python learning grounds
